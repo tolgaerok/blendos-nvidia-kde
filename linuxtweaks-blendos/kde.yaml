@@ -1,0 +1,253 @@
+arch-repo: 'https://geo.mirror.pkgbuild.com'
+impl: 'https://github.com/blend-os/tracks/raw/main'
+repo: 'https://pkg-repo.blendos.co'
+track: 'linux-tweaks'
+
+# Tolga Erok
+# 11/8/25
+
+packages:
+# 🖥️ Desktop & KDE
+- 'kcoreaddons'
+- 'kde-system-meta'
+- 'kde-utilities-meta'
+- 'plasma'
+- 'plasma-workspace'
+- 'sddm'
+- 'systemsettings'
+
+# 🌐 Akondai Related
+- 'kaccounts-integration'
+- 'kactivitymanagerd'
+- 'kdepim-addons'
+- 'kdepim-runtime'
+- 'korganizer'
+
+# 📝 Spell check support
+- 'aspell'
+- 'aspell-en'
+- 'hunspell'
+- 'hunspell-en_au'
+
+# 🎨 Fonts
+- 'gnu-free-fonts'
+- 'nerd-fonts'
+- 'noto-fonts-emoji'
+- 'ttf-arphic-uming'
+- 'ttf-firacode-nerd'
+- 'ttf-font-awesome'
+- 'ttf-indic-otf'
+
+# 🎞️ Multimedia & Graphics
+# - 'rygel'
+- 'ffmpeg'
+- 'ffmpeg4.4'
+- 'ffmpegthumbnailer'
+- 'ffmpegthumbs'
+- 'kcodecs'
+- 'mpv'
+
+# 🎮 NVIDIA & GPU Support
+- 'nvidia-dkms'
+- 'nvidia-prime'
+- 'nvidia-settings'
+- 'nvidia-utils'
+- 'switcheroo-control'
+
+# 🌐 Networking & File Sharing
+- 'samba'
+- 'waydroid'
+- 'waydroid-image'
+- 'wget'
+- 'wsdd'
+
+# 🔧 Core Utilities
+# - 'notify-send-py'
+# - 'pipxu'
+# - 'python-pipx-git'
+# - 'python-pipx'
+- 'arch-install-scripts'
+- 'archlinux-keyring'
+- 'b43-fwcutter'
+- 'base-devel'
+- 'bash'
+- 'bzip2'
+- 'coreutils'
+- 'fakeroot'
+- 'fastfetch'
+- 'ffmpeg'
+- 'file'
+- 'filesystem'
+- 'filesystem-blend'
+- 'findutils'
+- 'firefox'
+- 'git'
+- 'sudo'
+- 'sysfsutils'
+- 'syslinux'
+- 'systemd'
+- 'systemd-libs'
+- 'systemd-resolvconf'
+- 'systemd-sysvcompat'
+- 'which'
+- 'zram-generator'
+- 'zstd'
+
+# 📦 Development & Packaging
+- 'python-pyqt5'
+
+# 🔍 Qt Frameworks
+- 'qt5-base'
+- 'qt5-declarative'
+- 'qt5-svg'
+- 'qt5-translations'
+- 'qt5-wayland'
+- 'qt5-x11extras'
+- 'qt6-5compat'
+- 'qt6-base'
+- 'qt6-declarative'
+- 'qt6-imageformats'
+- 'qt6-multimedia'
+- 'qt6-multimedia-ffmpeg'
+- 'qt6-positioning'
+- 'qt6-sensors'
+- 'qt6-shadertools'
+- 'qt6-speech'
+- 'qt6-svg'
+- 'qt6-tools'
+- 'qt6-translations'
+- 'qt6-virtualkeyboard'
+- 'qt6-wayland'
+- 'qt6-webchannel'
+- 'qt6-webengine'
+- 'qt6-websockets'
+
+# 📂 Filesystem Tools
+- 'fuse-common'
+- 'fuse2'
+- 'fuse3'
+
+# 🖨️ Printing
+- 'system-config-printer'
+
+# 🛠️ Fun & Terminal Eye Candy
+- 'cmatrix'
+- 'figlet'
+- 'fortune-mod'
+- 'lolcat'
+
+# 🛠️ Misc GUI Tools
+- 'variety'
+- 'yad'
+
+aur-packages:
+# - 'python-setuptools'
+- 'notify-send-py'
+- 'pipxu'
+- 'python-pipx-git'
+- 'visual-studio-code-bin'
+
+package-repos:
+- name: 'chaotic-aur'
+  repo-url: 'https://cdn-mirror.chaotic.cx/$repo/$arch'
+- name: 'cachyos'
+  repo-url: 'https://mirror.cachyos.org/repo/$arch/$repo/'
+
+services:
+# 🖨️ Printing
+- 'cups'
+
+# 🌐 Networking & File Sharing
+- 'NetworkManager'
+- 'smb'
+- 'nmb'
+- 'wsdd'
+- 'switcheroo-control'
+
+# 🎮 NVIDIA
+- 'nvidia-persistenced'
+
+# 🖥️ Display/Login
+- 'sddm'
+
+# ⚙️ Custom Scripts
+- 'set-mq-deadline'
+
+commands:
+#  - 'curl -sSL https://raw.githubusercontent.com/tohurtv/blend-update/main/install.sh | bash -s -- "Mon,Fri 12:00"'
+
+# Set locale to Autralia
+- 'locale-gen en_AU.UTF-8'
+- 'sudo localedef -i en_AU -f UTF-8 en_AU.UTF-8'
+
+# Install scloud downnloader
+- 'pipxu install git+https://github.com/flyingrub/scdl'
+
+# From original YAML on system
+- 'rm -f /usr/share/applications/Waydroid.desktop'
+
+# Add myself to admin   hint: sudo -i
+- 'usermod -aG wheel tolga'
+
+# Enable added services
+- 'systemctl enable smb nmb wsdd'
+
+# Enable NVIDIA persistencd
+- 'systemctl enable --now nvidia-persistenced.service'
+
+# Enable fstrim timer && trim ssd now
+- 'fstrim -v / && fstrim -v /home || true'
+- 'sudo systemctl enable --now fstrim.timer'
+
+# Create the SSD scheduler script, kingtolga style
+- |
+  cat > /usr/local/bin/set-mq-deadline.sh <<'EOF'
+  #!/bin/bash
+  # Tolga Erok
+  # 8/8/25
+
+  for dev in /sys/block/*; do
+    if [ -f "$dev/queue/rotational" ] && [ "$(cat "$dev/queue/rotational")" -eq 0 ]; then
+      # Check if device is NVMe
+      if [[ "$(basename "$dev")" == nvme* ]]; then
+        # NVMe: set scheduler to none
+        echo none > "$dev/queue/scheduler" 2>/dev/null || true
+      else
+        # SSD (non-NVMe): set scheduler to mq-deadline
+        echo mq-deadline > "$dev/queue/scheduler" 2>/dev/null || true
+      fi
+    fi
+  done
+  EOF
+- 'chmod +x /usr/local/bin/set-mq-deadline.sh'
+
+# Create systemd service to run my script once at boot
+- |
+  cat > /etc/systemd/system/set-mq-deadline.service <<'EOF'
+  [Unit]
+  Description=Set mq-deadline scheduler for SSDs, kingtolga style
+  After=multi-user.target
+
+  [Service]
+  Type=oneshot
+  ExecStart=/usr/local/bin/set-mq-deadline.sh
+
+  [Install]
+  WantedBy=multi-user.target
+  EOF
+
+# Enable the systemd service so it runs at boot! Lets see if this works
+- 'systemctl enable set-mq-deadline.service'
+
+# Show current I/O scheduler setup in build logs for visibility, (BETA):  journalctl -t io-scheduler -n 20
+- |
+  systemd-cat -t io-scheduler bash -c ' \
+  echo "=== Storage Devices and I/O Schedulers ==="; \
+  for dev in /sys/block/*; do \
+    [ -f "$dev/queue/rotational" ] || continue; \
+    rot=$(cat "$dev/queue/rotational"); \
+    type=$([ "$rot" -eq 0 ] && echo "SSD/NVMe" || echo "HDD"); \
+    echo "$(basename "$dev"): $type | Scheduler: $(cat "$dev/queue/scheduler")"; \
+  done; \
+  echo "=========================================="; \
+  '
