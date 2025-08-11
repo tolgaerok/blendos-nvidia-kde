@@ -1,4 +1,7 @@
-impl: 'https://github.com/blend-os/tracks/raw/main'
+repo: 'https://pkg-repo.blendos.co'
+arch-repo: 'https://geo.mirror.pkgbuild.com'
+
+impl: 'https://raw.githubusercontent.com/tolgaerok/blendos-nvidia-kde/main/linuxtweaks-blendos/kde.yaml'
 track: 'blendos-base'
 
 # Tolga Erok
