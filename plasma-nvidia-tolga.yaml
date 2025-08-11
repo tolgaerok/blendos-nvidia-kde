@@ -206,14 +206,3 @@ commands:
   WantedBy=multi-user.target
   EOF
 - 'systemctl enable set-mq-deadline.service'
-- |
-  systemd-cat -t io-scheduler bash -c ' \
-  echo "=== Storage Devices and I/O Schedulers ==="; \
-  for dev in /sys/block/*; do \
-    [ -f "$dev/queue/rotational" ] || continue; \
-    rot=$(cat "$dev/queue/rotational"); \
-    type=$([ "$rot" -eq 0 ] && echo "SSD/NVMe" || echo "HDD"); \
-    echo "$(basename "$dev"): $type | Scheduler: $(cat "$dev/queue/scheduler")"; \
-  done; \
-  echo "=========================================="; \
-  '
