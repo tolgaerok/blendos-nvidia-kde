@@ -1,0 +1,219 @@
+arch-repo: 'https://geo.mirror.pkgbuild.com'
+repo: 'https://pkg-repo.blendos.co'
+
+# My custom track for Plasma + NVIDIA + Akondai + Korganizer
+impl: 'https://raw.githubusercontent.com/tolgaerok/blendos-nvidia-kde/main/plasma-nvidia-tolga.yaml'
+track: 'plasma-nvidia-tolga'
+
+# Tolga Erok
+# 11/8/25
+
+packages:
+# 🖥️ Desktop & KDE
+- 'kcoreaddons'
+- 'kde-system-meta'
+- 'kde-utilities-meta'
+- 'plasma'
+- 'plasma-workspace'
+- 'sddm'
+- 'systemsettings'
+
+# 🌐 Akondai Related
+- 'kaccounts-integration'
+- 'kactivitymanagerd'
+- 'kdepim-addons'
+- 'kdepim-runtime'
+- 'korganizer'
+
+# 📝 Spell check support
+- 'aspell'
+- 'aspell-en'
+- 'hunspell'
+- 'hunspell-en_au'
+
+# 🎨 Fonts
+- 'gnu-free-fonts'
+- 'nerd-fonts'
+- 'noto-fonts-emoji'
+- 'ttf-arphic-uming'
+- 'ttf-firacode-nerd'
+- 'ttf-font-awesome'
+- 'ttf-indic-otf'
+
+# 🎞️ Multimedia & Graphics
+- 'ffmpeg'
+- 'ffmpeg4.4'
+- 'ffmpegthumbnailer'
+- 'ffmpegthumbs'
+- 'kcodecs'
+- 'mpv'
+
+# 🎮 NVIDIA & GPU Support
+- 'nvidia-dkms'
+- 'nvidia-prime'
+- 'nvidia-settings'
+- 'nvidia-utils'
+- 'switcheroo-control'
+
+# 🌐 Networking & File Sharing
+- 'samba'
+- 'waydroid'
+- 'waydroid-image'
+- 'wget'
+- 'wsdd'
+
+# 🔧 Core Utilities
+- 'arch-install-scripts'
+- 'archlinux-keyring'
+- 'b43-fwcutter'
+- 'base-devel'
+- 'bash'
+- 'bzip2'
+- 'coreutils'
+- 'fakeroot'
+- 'fastfetch'
+- 'file'
+- 'filesystem'
+- 'filesystem-blend'
+- 'findutils'
+- 'firefox'
+- 'git'
+- 'sudo'
+- 'sysfsutils'
+- 'syslinux'
+- 'systemd'
+- 'systemd-libs'
+- 'systemd-resolvconf'
+- 'systemd-sysvcompat'
+- 'which'
+- 'zram-generator'
+- 'zstd'
+
+# 📦 Development & Packaging
+- 'python-pyqt5'
+
+# 🔍 Qt Frameworks
+- 'qt5-base'
+- 'qt5-declarative'
+- 'qt5-svg'
+- 'qt5-translations'
+- 'qt5-wayland'
+- 'qt5-x11extras'
+- 'qt6-5compat'
+- 'qt6-base'
+- 'qt6-declarative'
+- 'qt6-imageformats'
+- 'qt6-multimedia'
+- 'qt6-multimedia-ffmpeg'
+- 'qt6-positioning'
+- 'qt6-sensors'
+- 'qt6-shadertools'
+- 'qt6-speech'
+- 'qt6-svg'
+- 'qt6-tools'
+- 'qt6-translations'
+- 'qt6-virtualkeyboard'
+- 'qt6-wayland'
+- 'qt6-webchannel'
+- 'qt6-webengine'
+- 'qt6-websockets'
+
+# 📂 Filesystem Tools
+- 'fuse-common'
+- 'fuse2'
+- 'fuse3'
+
+# 🖨️ Printing
+- 'system-config-printer'
+
+# 🛠️ Fun & Terminal Eye Candy
+- 'cmatrix'
+- 'figlet'
+- 'fortune-mod'
+- 'lolcat'
+
+# 🛠️ Misc GUI Tools
+- 'variety'
+- 'yad'
+
+aur-packages:
+- 'notify-send-py'
+- 'pipxu'
+- 'python-pipx-git'
+- 'visual-studio-code-bin'
+
+package-repos:
+- name: 'chaotic-aur'
+  repo-url: 'https://cdn-mirror.chaotic.cx/$repo/$arch'
+- name: 'cachyos'
+  repo-url: 'https://mirror.cachyos.org/repo/$arch/$repo/'
+
+services:
+# 🖨️ Printing
+- 'cups'
+
+# 🌐 Networking & File Sharing
+- 'NetworkManager'
+- 'smb'
+- 'nmb'
+- 'wsdd'
+- 'switcheroo-control'
+
+# 🎮 NVIDIA
+- 'nvidia-persistenced'
+
+# 🖥️ Display/Login
+- 'sddm'
+
+# ⚙️ Custom Scripts
+- 'set-mq-deadline'
+
+commands:
+- 'locale-gen en_AU.UTF-8'
+- 'sudo localedef -i en_AU -f UTF-8 en_AU.UTF-8'
+- 'pipxu install git+https://github.com/flyingrub/scdl'
+- 'rm -f /usr/share/applications/Waydroid.desktop'
+- 'usermod -aG wheel tolga'
+- 'systemctl enable smb nmb wsdd'
+- 'systemctl enable --now nvidia-persistenced.service'
+- 'fstrim -v / && fstrim -v /home || true'
+- 'sudo systemctl enable --now fstrim.timer'
+- |
+  cat > /usr/local/bin/set-mq-deadline.sh <<'EOF'
+  #!/bin/bash
+  for dev in /sys/block/*; do
+    if [ -f "$dev/queue/rotational" ] && [ "$(cat "$dev/queue/rotational")" -eq 0 ]; then
+      if [[ "$(basename "$dev")" == nvme* ]]; then
+        echo none > "$dev/queue/scheduler" 2>/dev/null || true
+      else
+        echo mq-deadline > "$dev/queue/scheduler" 2>/dev/null || true
+      fi
+    fi
+  done
+  EOF
+- 'chmod +x /usr/local/bin/set-mq-deadline.sh'
+- |
+  cat > /etc/systemd/system/set-mq-deadline.service <<'EOF'
+  [Unit]
+  Description=Set mq-deadline scheduler for SSDs
+  After=multi-user.target
+
+  [Service]
+  Type=oneshot
+  ExecStart=/usr/local/bin/set-mq-deadline.sh
+
+  [Install]
+  WantedBy=multi-user.target
+  EOF
+- 'systemctl enable set-mq-deadline.service'
+- |
+  systemd-cat -t io-scheduler bash -c ' \
+  echo "=== Storage Devices and I/O Schedulers ==="; \
+  for dev in /sys/block/*; do \
+    [ -f "$dev/queue/rotational" ] || continue; \
+    rot=$(cat "$dev/queue/rotational"); \
+    type=$([ "$rot" -eq 0 ] && echo "SSD/NVMe" || echo "HDD"); \
+    echo "$(basename "$dev"): $type | Scheduler: $(cat "$dev/queue/scheduler")"; \
+  done; \
+  echo "=========================================="; \
+  '
