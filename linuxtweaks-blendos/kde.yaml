@@ -1,4 +1,5 @@
-# Minimal overlay to add NVIDIA + KDE tweaks
+impl: 'https://github.com/blend-os/tracks/raw/main'
+track: 'blendos-base'
 
 packages:
   - 'nvidia-dkms'
