@@ -4,7 +4,7 @@ arch-repo: 'https://geo.mirror.pkgbuild.com'
 impl: 'https://github.com/tolgaerok/blendos-nvidia-kde/raw/main'
 # impl: 'https://raw.githubusercontent.com/tolgaerok/blendos-nvidia-kde/main/plasma-nvidia-tolga.yaml'
 
-track: 'plasma-nvidia-tolga'
+track: 'tolga'
 
 # Tolga Erok
 # 11/8/25
