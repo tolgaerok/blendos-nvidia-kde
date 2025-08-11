@@ -1,6 +1,4 @@
-arch-repo: 'https://geo.mirror.pkgbuild.com'
 impl: 'https://github.com/blend-os/tracks/raw/main'
-repo: 'https://pkg-repo.blendos.co'
 track: 'linux-tweaks'
 
 # Tolga Erok
