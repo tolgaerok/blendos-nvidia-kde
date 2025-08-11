@@ -1,7 +1,9 @@
-arch-repo: 'https://geo.mirror.pkgbuild.com'
 repo: 'https://pkg-repo.blendos.co'
+arch-repo: 'https://geo.mirror.pkgbuild.com'
 
-# My custom track for Plasma + NVIDIA + Akondai + Korganizer
+impl: 'https://github.com/tolgaerok/blendos-nvidia-kde/raw/main'
+# impl: 'https://raw.githubusercontent.com/tolgaerok/blendos-nvidia-kde/main/plasma-nvidia-tolga.yaml'
+
 track: 'plasma-nvidia-tolga'
 
 # Tolga Erok
