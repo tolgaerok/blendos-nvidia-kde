@@ -21,19 +21,19 @@ packages:
 - 'kdepim-runtime'
 - 'korganizer'
 
-# Theming and Visuals
+# 🎨 Theming and Visuals
 - 'breeze'
 - 'plasma-workspace'
 # - 'kde-wallpapers'
 
-# File System and Media Support
+# 📂 File System and Media Support
 - 'kio-extras' # Provides various KIO slaves
 - 'baloo' # File indexing and search
 - 'baloo-widgets'
 # - 'phonon-qt5' # Multimedia framework
 # - 'phonon-qt5-vlc' # VLC backend for phonon
 
-# Virtualization and Container Support
+# 🖥️ Virtualization & Containers
 - 'virt-manager'
 - 'waydroid'
 - 'flatpak'
@@ -157,7 +157,7 @@ packages:
 - 'yad'
 
 aur-packages:
-# - 'python-setuptools'
+# 📦 Additional AUR Packages
 - 'notify-send-py'
 - 'pipxu'
 - 'python-pipx-git'
@@ -168,7 +168,6 @@ aur-packages:
 - 'phonon-qt5-mpv'
 - 'phonon-qt5'
 
-# Additional AUR Packages (kept from gnome.yaml as they are not DE-specific)
 - 'linutil-bin'
 - 'qemu-full'
 - 'waydroid-image-gapps'
