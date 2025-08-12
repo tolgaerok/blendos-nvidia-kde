@@ -205,6 +205,7 @@ services:
 - 'libvirtd'
 - 'libvirt-storaged'
 
+# 🛠️ Add Nvidia option NVReg options
 files:
   /etc/modprobe.d/nvidia.conf: |
     options nvidia NVreg_DynamicPowerManagement=0 NVreg_EnableMSI=1 NVreg_EnablePCIERelaxedOrderingMode=1 NVreg_EnablePCIeGen3=1 NVreg_EnableResizableBar=1 NVreg_EnableStreamMemOPs=1 NVreg_PreserveVideoMemoryAllocations=1 NVreg_UsePageAttributeTable=1 NVreg_TemporaryFilePath="/var/tmp" NVreg_RegistryDwords="RMIntrLockingMode=1; OverrideMaxPerf=0x1; PowerMizerEnable=0x1; RmPpmPolicy=0x1"
