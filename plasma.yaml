@@ -1,30 +1,33 @@
-repo: 'https://pkg-repo.blendos.co'
-arch-repo: 'https://geo.mirror.pkgbuild.com'
-
-impl: 'https://github.com/tolgaerok/blendos-nvidia-kde/raw/main'
-# impl: 'https://raw.githubusercontent.com/tolgaerok/blendos-nvidia-kde/main/plasma-nvidia-tolga.yaml'
-
-track: 'tolga'
+impl: 'https://github.com/blend-os/tracks/raw/main'
+track: 'blendos-base'
 
 # Tolga Erok
 # 11/8/25
 
 packages:
-# 🖥️ Desktop & KDE
-- 'kcoreaddons'
-- 'kde-system-meta'
-- 'kde-utilities-meta'
-- 'plasma'
-- 'plasma-workspace'
-- 'sddm'
-- 'systemsettings'
-
 # 🌐 Akondai Related
 - 'kaccounts-integration'
 - 'kactivitymanagerd'
 - 'kdepim-addons'
 - 'kdepim-runtime'
 - 'korganizer'
+
+# Theming and Visuals
+- 'breeze'
+- 'plasma-workspace'
+- 'kde-wallpapers'
+
+# File System and Media Support
+- 'kio-extras' # Provides various KIO slaves
+- 'baloo' # File indexing and search
+- 'baloo-widgets'
+- 'phonon-qt5' # Multimedia framework
+- 'phonon-qt5-vlc' # VLC backend for phonon
+
+# Virtualization and Container Support
+- 'virt-manager'
+- 'waydroid'
+- 'flatpak'
 
 # 📝 Spell check support
 - 'aspell'
@@ -95,6 +98,7 @@ packages:
 - 'which'
 - 'zram-generator'
 - 'zstd'
+- 'konsole'
 
 # 📦 Development & Packaging
 - 'python-pyqt5'
@@ -150,6 +154,15 @@ aur-packages:
 - 'python-pipx-git'
 - 'visual-studio-code-bin'
 
+# Additional AUR Packages (kept from gnome.yaml as they are not DE-specific)
+- 'linutil-bin'
+- 'qemu-full'
+- 'waydroid-image-gapps'
+- 'quickemu'
+- 'quickgui-bin'
+- 'visual-studio-code-bin'
+- 'google-chrome'
+
 package-repos:
 - name: 'chaotic-aur'
   repo-url: 'https://cdn-mirror.chaotic.cx/$repo/$arch'
@@ -176,9 +189,19 @@ services:
 # ⚙️ Custom Scripts
 - 'set-mq-deadline'
 
+- 'libvirtd'
+- 'libvirt-storaged'
+
 commands:
 #  - 'curl -sSL https://raw.githubusercontent.com/tohurtv/blend-update/main/install.sh | bash -s -- "Mon,Fri 12:00"'
 
+# Configuration commands (removed GNOME-specific cleanup)
+- 'groupadd -f libvirt'
+- 'useradd -r -s /sbin/nologin libvirt-qemu 2>/dev/null || true'
+- 'usermod -aG kvm,libvirt libvirt-qemu'
+- 'usermod -aG libvirt "$(whoami)"'
+- 'pacman --noconfirm -Rns cups'
+  
 # Set locale to Autralia
 - 'locale-gen en_AU.UTF-8'
 - 'sudo localedef -i en_AU -f UTF-8 en_AU.UTF-8'
