@@ -217,7 +217,7 @@ files:
 
 commands:
 # Rebuild initramfs so modprobe options take effect at boot
-- 'mkinitcpio -P'
+- 'dracut --force || mkinitcpio -P || true'
 
 #  - 'curl -sSL https://raw.githubusercontent.com/tohurtv/blend-update/main/install.sh | bash -s -- "Mon,Fri 12:00"'
 
