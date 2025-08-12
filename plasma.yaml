@@ -156,8 +156,8 @@ packages:
 - 'variety'
 - 'yad'
 
-aur-packages:
 # 📦 Additional AUR Packages
+aur-packages:
 - 'notify-send-py'
 - 'pipxu'
 - 'python-pipx-git'
@@ -175,6 +175,9 @@ aur-packages:
 - 'quickgui-bin'
 - 'visual-studio-code-bin'
 - 'google-chrome'
+
+- 'nomacs'
+- 'xnviewmp'
 
 package-repos:
 - name: 'chaotic-aur'
