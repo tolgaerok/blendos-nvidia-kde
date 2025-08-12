@@ -24,14 +24,14 @@ packages:
 # Theming and Visuals
 - 'breeze'
 - 'plasma-workspace'
-- 'kde-wallpapers'
+# - 'kde-wallpapers'
 
 # File System and Media Support
 - 'kio-extras' # Provides various KIO slaves
 - 'baloo' # File indexing and search
 - 'baloo-widgets'
-- 'phonon-qt5' # Multimedia framework
-- 'phonon-qt5-vlc' # VLC backend for phonon
+# - 'phonon-qt5' # Multimedia framework
+# - 'phonon-qt5-vlc' # VLC backend for phonon
 
 # Virtualization and Container Support
 - 'virt-manager'
