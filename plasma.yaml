@@ -163,6 +163,11 @@ aur-packages:
 - 'python-pipx-git'
 - 'visual-studio-code-bin'
 
+- 'phonon-qt5-vlc'
+- 'phonon-qt6-mpv' 
+- 'phonon-qt5-mpv'
+- 'phonon-qt5'
+
 # Additional AUR Packages (kept from gnome.yaml as they are not DE-specific)
 - 'linutil-bin'
 - 'qemu-full'
