@@ -5,6 +5,15 @@ track: 'blendos-base'
 # 11/8/25
 
 packages:
+# 🖥️ Desktop & KDE
+- 'kcoreaddons'
+- 'kde-system-meta'
+- 'kde-utilities-meta'
+- 'plasma'
+- 'plasma-workspace'
+- 'sddm'
+- 'systemsettings'
+
 # 🌐 Akondai Related
 - 'kaccounts-integration'
 - 'kactivitymanagerd'
