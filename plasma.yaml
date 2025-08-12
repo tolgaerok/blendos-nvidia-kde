@@ -71,8 +71,8 @@ packages:
 
 # 🌐 Networking & File Sharing
 - 'samba'
-- 'waydroid'
-- 'waydroid-image'
+# - 'waydroid'
+# - 'waydroid-image'
 - 'wget'
 - 'wsdd'
 
@@ -204,6 +204,11 @@ services:
 
 - 'libvirtd'
 - 'libvirt-storaged'
+
+files:
+  /etc/modprobe.d/nvidia.conf: |
+    options nvidia NVreg_DynamicPowerManagement=0 NVreg_EnableMSI=1 NVreg_EnablePCIERelaxedOrderingMode=1 NVreg_EnablePCIeGen3=1 NVreg_EnableResizableBar=1 NVreg_EnableStreamMemOPs=1 NVreg_PreserveVideoMemoryAllocations=1 NVreg_UsePageAttributeTable=1 NVreg_TemporaryFilePath="/var/tmp" NVreg_RegistryDwords="RMIntrLockingMode=1; OverrideMaxPerf=0x1; PowerMizerEnable=0x1; RmPpmPolicy=0x1"
+    options nvidia_drm modeset=1
 
 commands:
 #  - 'curl -sSL https://raw.githubusercontent.com/tohurtv/blend-update/main/install.sh | bash -s -- "Mon,Fri 12:00"'
