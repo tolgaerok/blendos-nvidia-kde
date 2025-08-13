@@ -160,6 +160,7 @@ packages:
 aur-packages:
 - 'ppds-meta'
 - 'gutenprint'
+- 'foomatic-db-gutenprint-ppds'
 # - 'lpadmin'
 - 'notify-send-py'
 - 'pipxu'
@@ -213,6 +214,8 @@ services:
 
 commands:
 #  - 'curl -sSL https://raw.githubusercontent.com/tohurtv/blend-update/main/install.sh | bash -s -- "Mon,Fri 12:00"'
+- '/usr/bin/cups-genppdupdate'
+- 'systemctl restart cups'
 
 # Configuration commands (removed GNOME-specific cleanup)
 - 'groupadd -f libvirt'
