@@ -158,6 +158,8 @@ packages:
 
 # 📦 Additional AUR Packages
 aur-packages:
+- 'ppds-meta'
+- 'gutenprint'
 - 'lpadmin'
 - 'notify-send-py'
 - 'pipxu'
