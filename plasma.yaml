@@ -182,11 +182,11 @@ aur-packages:
 - 'nomacs'
 - 'xnviewmp'
 
-package-repos:
-- name: 'chaotic-aur'
-  repo-url: 'https://cdn-mirror.chaotic.cx/$repo/$arch'
-- name: 'cachyos'
-  repo-url: 'https://mirror.cachyos.org/repo/$arch/$repo/'
+#package-repos:
+#- name: 'chaotic-aur'
+#  repo-url: 'https://cdn-mirror.chaotic.cx/$repo/$arch'
+#- name: 'cachyos'
+#  repo-url: 'https://mirror.cachyos.org/repo/$arch/$repo/'
 
 services:
 # 🖨️ Printing
