@@ -10,7 +10,7 @@ packages:
 - 'kde-system-meta'
 - 'kde-utilities-meta'
 - 'plasma'
-- 'plasma-workspace'
+# - 'plasma-workspace'
 - 'sddm'
 - 'systemsettings'
 
@@ -90,7 +90,7 @@ packages:
 - 'coreutils'
 - 'fakeroot'
 - 'fastfetch'
-- 'ffmpeg'
+# - 'ffmpeg'
 - 'file'
 - 'filesystem'
 - 'filesystem-blend'
