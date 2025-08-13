@@ -208,17 +208,7 @@ services:
 - 'libvirtd'
 - 'libvirt-storaged'
 
-# 🛠️ Add Nvidia option NVReg options
-#system:
-files:
-  /etc/modprobe.d/nvidia.conf: |
-    options nvidia NVreg_DynamicPowerManagement=0 NVreg_EnableMSI=1 NVreg_EnablePCIERelaxedOrderingMode=1 NVreg_EnablePCIeGen3=1 NVreg_EnableResizableBar=1 NVreg_EnableStreamMemOPs=1 NVreg_PreserveVideoMemoryAllocations=1 NVreg_UsePageAttributeTable=1 NVreg_TemporaryFilePath="/var/tmp" NVreg_RegistryDwords="RMIntrLockingMode=1; OverrideMaxPerf=0x1; PowerMizerEnable=0x1; RmPpmPolicy=0x1"
-    options nvidia_drm modeset=1
-
 commands:
-# Rebuild initramfs so modprobe options take effect at boot
-- 'dracut --force || mkinitcpio -P || true'
-
 #  - 'curl -sSL https://raw.githubusercontent.com/tohurtv/blend-update/main/install.sh | bash -s -- "Mon,Fri 12:00"'
 
 # Configuration commands (removed GNOME-specific cleanup)
@@ -290,6 +280,14 @@ commands:
 
 # Enable the systemd service so it runs at boot! Lets see if this works
 - 'systemctl enable set-mq-deadline.service'
+
+# 🛠️ Add Nvidia option NVReg options
+- |
+  cat > /etc/modprobe.d/nvidia.conf <<'EOF'
+  options nvidia NVreg_DynamicPowerManagement=0 NVreg_EnableMSI=1 NVreg_EnablePCIERelaxedOrderingMode=1 NVreg_EnablePCIeGen3=1 NVreg_EnableResizableBar=1 NVreg_EnableStreamMemOPs=1 NVreg_PreserveVideoMemoryAllocations=1 NVreg_UsePageAttributeTable=1 NVreg_TemporaryFilePath="/var/tmp" NVreg_RegistryDwords="RMIntrLockingMode=1; OverrideMaxPerf=0x1; PowerMizerEnable=0x1; RmPpmPolicy=0x1"
+  options nvidia_drm modeset=1
+  EOF
+- 'mkinitcpio -P'
 
 # Show current I/O scheduler setup in build logs for visibility, (BETA):  journalctl -t io-scheduler -n 20
 - |
