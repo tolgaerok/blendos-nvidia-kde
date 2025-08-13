@@ -160,7 +160,7 @@ packages:
 aur-packages:
 - 'ppds-meta'
 - 'gutenprint'
-- 'lpadmin'
+# - 'lpadmin'
 - 'notify-send-py'
 - 'pipxu'
 - 'python-pipx-git'
