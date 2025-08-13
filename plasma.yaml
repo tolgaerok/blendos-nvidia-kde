@@ -237,6 +237,7 @@ commands:
 
 # Enable NVIDIA persistencd
 - 'systemctl enable --now nvidia-persistenced.service'
+- 'systemctl enable avahi-daemon.service'
 
 # Enable fstrim timer && trim ssd now
 - 'fstrim -v / && fstrim -v /home || true'
